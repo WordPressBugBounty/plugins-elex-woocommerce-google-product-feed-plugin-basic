@@ -1,0 +1,1 @@
+# plugins-elex-woocommerce-google-product-feed-plugin-basic
