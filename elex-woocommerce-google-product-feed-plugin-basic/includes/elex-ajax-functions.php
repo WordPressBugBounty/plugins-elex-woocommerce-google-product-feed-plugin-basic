@@ -276,8 +276,13 @@ class Elex_Gpf_Ajax_Call {
 		$table_name    = $wpdb->prefix . 'gpf_feeds';
 		$feed_id_query = "SELECT MAX(feed_id) FROM $table_name";
 
-		$result  = $wpdb->get_results( ( $wpdb->prepare( '%1s', $feed_id_query ) ? stripslashes( $wpdb->prepare( '%1s', $feed_id_query ) ) : $wpdb->prepare( '%s', '' ) ), ARRAY_A );
-		$feed_id = wp_list_pluck( $result, 'MAX(feed_id)' );
+		$result      = elexGpfWPFluent()->table( 'gpf_feeds' )
+		->select( 'feed_id' )
+		->orderBy( 'feed_id', 'desc' )
+		->limit( 1 )
+		->get();
+		$max_feed_id = isset( $result[0]->feed_id ) ? $result[0]->feed_id : null;
+		$feed_id     = array( $max_feed_id );
 
 		if ( ! $feed_id ) {
 			$feed_id = 1;
@@ -385,8 +390,10 @@ class Elex_Gpf_Ajax_Call {
 			$table_name = $wpdb->prefix . 'gpf_feeds';
 			$id         = $feed_id;
 			$meta_key   = 'temp_report_data';
-			$query      = "DELETE FROM $table_name WHERE (feed_id= $id AND feed_meta_key = '$meta_key') ";
-			$wpdb->query( ( $wpdb->prepare( '%1s', $query ) ? stripslashes( $wpdb->prepare( '%1s', $query ) ) : $wpdb->prepare( '%s', '' ) ), ARRAY_A );
+			elexGpfWPFluent()->table( 'gpf_feeds' )
+			->where( 'feed_id', '=', $id )
+			->where( 'feed_meta_key', '=', $meta_key )
+			->delete();
 		} else {
 			$update_report_data = $feed_report;
 		}
@@ -1225,7 +1232,11 @@ class Elex_Gpf_Ajax_Call {
 			$product           = wc_get_product( $ids );
 			$weight_unit       = get_option( 'woocommerce_weight_unit' );
 			$dimension_unit    = get_option( 'woocommerce_dimension_unit' );
-			$map_prod_attr_val = $product->get_meta( $prod_attr );
+			// $map_prod_attr_val = $product->get_meta( $prod_attr );
+			if ( ! in_array( $prod_attr, array( '_stock_status', '_regular_price', '_sale_price', '_price', '_weight', '_length', '_width', '_height' ), true ) ) {
+				$map_prod_attr_val = $product->get_meta( $prod_attr );
+			}
+
 			if ( '_width' == $prod_attr || '_height' == $prod_attr || '_length' == $prod_attr ) {
 				$map_prod_attr_val = $map_prod_attr_val . ' ' . $dimension_unit;
 			}
@@ -1338,8 +1349,7 @@ class Elex_Gpf_Ajax_Call {
 			}
 		} elseif ( 'review_count' == $prod_attr ) {
 			$product = wc_get_product( $ids );
-			$product->get_meta( '_wc_average_rating' );
-			$map_prod_attr_val = $product->get_meta( '_wc_average_rating' );
+			$map_prod_attr_val = $product->get_average_rating();
 		}
 		if ( '_stock_status' == $prod_attr ) {
 			$product           = wc_get_product( $ids );

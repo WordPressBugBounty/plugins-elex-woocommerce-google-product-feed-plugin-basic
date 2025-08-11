@@ -39,6 +39,20 @@ if ( ! defined( 'ABSPATH' ) ) {
 		</tr>
 		<tr>
 			<td class="elex-gpf-settings-table-left">
+				<?php esc_html_e( 'Sync to Google', 'elex-product-feed' ); ?><span style="vertical-align: super;color:green;font-size:12px">Premium</span>
+			</td>
+			<td class='elex-gpf-settings-table-middle'>
+				<span class='woocommerce-help-tip tooltip' data-tooltip='<?php esc_html_e( 'Enable this option to sync your WooCommerce products to Google Merchant Center. You can schedule the sync in the option given below', 'elex-product-feed' ); ?>'></span>
+			</td>
+			<td class="elex-gpf-settings-table-right">
+				<label class="switch">
+					<input id="elex_sync_to_google" type="checkbox" >
+					<span class="slider round"></span>
+				</label>
+			</td>
+		</tr>
+		<tr>
+			<td class="elex-gpf-settings-table-left">
 				<?php
 					esc_html_e( 'Country of Sale ', 'elex-product-feed' );
 					echo '<span style="color:red;">*</span>';

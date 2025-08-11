@@ -106,6 +106,53 @@ class Elex_Settings_Tab_Fields {
 						</select>
 					</td>
 				</tr>
+				<table id="elex_google_sync_details_table">
+						<tr>
+							<td class="elex-gpf-settings-table-left" style="white-space: nowrap; min-width: 200px;">
+								<h4 style="margin: 0; color: #000;"><?php esc_html_e( 'Connect to Google', 'elex-product-feed' ); ?><span style="vertical-align: super;color:green;font-size:12px">Premium</span></h4>
+							</td>
+						</tr>
+						<tr>
+							<td class="elex-gpf-settings-table-left">
+								<?php esc_html_e( 'Client ID', 'elex-product-feed' ); ?>
+							</td>
+							<td class='elex-gpf-settings-table-middle'>
+								<span class='woocommerce-help-tip tooltip' data-tooltip='<?php esc_html_e( 'Enter your Google API Client ID.', 'elex-product-feed' ); ?>'></span>
+							</td>
+							<td class="elex-gpf-settings-table-right">
+								<input type="text" id="google_client_id" name="google_client_id" value="" class="regular-text" disabled />
+							</td>
+						</tr>
+						<tr>
+							<td class="elex-gpf-settings-table-left">
+								<label for="google_client_secret"><?php esc_html_e( 'Client Secret', 'elex-product-feed' ); ?></label>
+							</td>
+							<td class='elex-gpf-settings-table-middle'>
+								<span class='woocommerce-help-tip tooltip' data-tooltip='<?php esc_html_e( 'Enter your Google API Client Secret.', 'elex-product-feed' ); ?>'></span>
+							</td>
+							<td class="elex-gpf-settings-table-right">
+								<input type="text" id="google_client_secret" name="google_client_secret" value="" class="regular-text" disabled />
+							</td>
+						</tr>
+						<tr>
+							<td class="elex-gpf-settings-table-left">
+								<label for="google_merchant_id"><?php esc_html_e( 'Merchant Id', 'elex-product-feed' ); ?></label>
+							</td>
+							<td class='elex-gpf-settings-table-middle'>
+								<span class='woocommerce-help-tip tooltip' data-tooltip='<?php esc_html_e( 'Enter your Google Merchant Center ID.', 'elex-product-feed' ); ?>'></span>
+							</td>
+							<td class="elex-gpf-settings-table-right">
+								<input type="text" id="google_merchant_id" name="google_merchant_id" value="" class="regular-text" disabled/>
+							</td>
+						</tr>
+						<tr>
+							<td colspan="3">
+								<button class="elex-connect-button" disabled> <?php esc_html_e( 'Connect', 'elex-product-feed' ); ?> </button>
+								<span class='woocommerce-help-tip tooltip' data-tooltip='<?php esc_html_e( 'Once the Client credentials are saved successfully click on Connect to get connected to Google Merchant Center.', 'elex-product-feed' ); ?>'></span>
+							</td>
+						</tr>
+					</table>
+
 			</table>
 			<div style="margin-bottom: 4%;">
 			<button class="botton button-large button-primary" id="elex_save_settings_tab_data" style="float: right; width: 10%;">Save</button>

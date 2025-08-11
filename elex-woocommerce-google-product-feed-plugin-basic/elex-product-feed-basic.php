@@ -4,9 +4,9 @@
   Plugin Name: ELEX WooCommerce Google Shopping (Google Product Feed) - Basic
   Plugin URI: https://elextensions.com/plugin/elex-woocommerce-google-product-feed-plugin-free/
   Description: Efficiently generate and manage Google Marketplace feeds for your WooCommerce Store.
-  Version: 1.4.3
+  Version: 1.4.4
   WC requires at least: 2.6.0
-  WC tested up to: 9.1
+  WC tested up to: 10.0.0
   Author: ELEXtensions
   Author URI: https://elextensions.com/
   Developer: ELEXtensions
@@ -32,6 +32,7 @@ if ( ! defined( 'ELEX_PRODUCT_FEED_MAIN_URL_PATH' ) ) {
 if ( ! function_exists( 'elex_gf_basic_is_woocommerce_active' ) ) {
 	require_once  'elex-includes/elex-gf-functions.php' ;
 }
+require 'includes/wp-fluent/autoload.php';
 // to check woocommerce is active
 function woocommerce_activation_notice_in_basic_gf() {  ?>
 	<div id="message" class="error">
@@ -200,7 +201,7 @@ if ( ! ( elex_gf_basic_is_woocommerce_active() ) ) {
 								?>
 									<tr>
 										<td class='elex-gpf-exclude-id'><a target="_blank" href="<?php echo esc_html( $permalink ); ?>"><?php echo esc_html( $prod_id ); ?></a></td>
-										<td class='elex-gpf-exclude-name'><?php echo esc_html( htmlspecialchars_decode( $prod_title ) ); ?></td>
+										<td class='elex-gpf-exclude-name'><?php echo filter_var( htmlspecialchars_decode( $prod_title, ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML401 ) ); ?></td>
 										<td class='elex-gpf-exclude-reason'><?php echo '<b>' . esc_html( $google_attr ) . '</b> is missing'; ?></td>
 									</tr>
 								<?php
@@ -333,7 +334,7 @@ if ( ! ( elex_gf_basic_is_woocommerce_active() ) ) {
 		require_once  ABSPATH . 'wp-admin/includes/plugin.php';
 	}
 	include_once __DIR__ . '/review_and_troubleshoot_notify/review-and-troubleshoot-notify-class.php';
-	$data                      = get_plugin_data( __FILE__ );
+	$data                      = get_plugin_data( __FILE__, false, false );
 	$data['name']              = $data['Name'];
 	$data['basename']          = plugin_basename( __FILE__ );
 	$data['rating_url']        = 'https://elextensions.com/plugin/elex-woocommerce-google-product-feed-plugin-free/#reviews/';

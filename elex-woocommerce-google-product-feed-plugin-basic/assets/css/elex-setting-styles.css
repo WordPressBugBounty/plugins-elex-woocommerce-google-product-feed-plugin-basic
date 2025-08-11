@@ -351,3 +351,171 @@
 .elex-gpf-steps-navigator {
     padding-bottom: 1%;
 }
+
+
+/* Style the Connected Account table */
+#elex_google_sync_details_table {
+    width: 100%;
+    margin: 20px 0;
+    border-collapse: separate;
+    border-spacing: 0;
+    background: #fff;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+    font-family: "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+#elex_google_sync_details_table tr:first-child td {
+    background-color: #fff; /* Set to white or any other color you prefer */
+    color: #000; /* Optional: Change text color to ensure visibility */
+    font-size: 18px;
+    font-weight: bold;
+    padding: 16px 20px;
+    
+}
+
+#elex_google_sync_details_table td {
+    padding: 14px 20px;
+    border-bottom: 1px solid #eee;
+    vertical-align: middle;
+    font-size: 15px;
+    color: #333;
+}
+
+#elex_google_sync_details_table td:first-child {
+    font-weight: 600;
+    color: #222;
+    /* width: 200px; */
+}
+
+#elex_google_sync_details_table input[type="text"] {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    background-color: #fdfdfd;
+    transition: border-color 0.3s;
+}
+
+#elex_google_sync_details_table input[type="text"]:focus {
+    border-color: #0073aa;
+    outline: none;
+    background-color: #fff;
+}
+
+/* Help tip styling */
+.woocommerce-help-tip.tooltip {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    background: url(https://s.w.org/images/core/emoji/13.1.0/svg/1f6c8.svg) no-repeat center center;
+    background-size: contain;
+    vertical-align: middle;
+    margin-left: 6px;
+}
+
+/* Connect & Disconnect button styles */
+#elex_google_sync_details_table a.elex-connect-button,
+#elex_google_sync_details_table a.elex-google-disconnect-btn {
+    display: inline-block;
+    padding: 10px 22px;
+    font-size: 15px;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 6px;
+    transition: background 0.3s ease, transform 0.2s ease;
+    margin-top: 8px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+#elex_google_sync_details_table a.elex-connect-button {
+    background-color: #28a745;
+    color: #fff;
+}
+
+#elex_google_sync_details_table a.elex-connect-button:hover {
+    background-color: #218838;
+    transform: scale(1.03);
+}
+
+#elex_google_sync_details_table a.elex-google-disconnect-btn {
+    background-color: #dc3545;
+    color: #fff;
+}
+
+#elex_google_sync_details_table a.elex-google-disconnect-btn:hover {
+    background-color: #c82333;
+    transform: scale(1.03);
+}
+
+.elex-gpf-toast-display-back{
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    top: 0;
+    left: 0;
+    z-index: 9999999999;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0,0,0,0.2);
+    display:none;
+}
+
+/* elex-toast css*/
+.elex-gpf-toast{
+
+    padding: 20px;
+    box-shadow: 0px 0px 6px #004BAF99;
+    border-radius: 8px;
+    background:#fff;
+    background: #fff;
+    z-index: 99999;
+    
+}
+.elex-gpf-toast h4{
+    margin-top:0px;
+    text-align:center;
+}
+.elex-flex{
+    display: flex;
+    gap:10px;
+    
+}
+.elex-gpf-toast .elex-flex button{
+    width:100%;
+}
+
+/* Success and error messages */
+#elex_google_sync_details_table div[style*="color:green"] {
+    margin: 10px 0;
+    font-weight: 600;
+    color: #28a745;
+}
+
+#elex_google_sync_details_table div[style*="color:red"] {
+    margin: 10px 0;
+    font-weight: 600;
+    color: #dc3545;
+}
+
+.elex-connect-button {
+    display: inline-block;
+    padding: 8px 12px;
+    background-color: #28a745;
+    color: #fff;
+    font-size: 14px;
+    font-weight: 500;
+    border: 1px solid #28a745;
+    border-radius: 4px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.elex-connect-button:hover {
+    background-color: #218838;
+    border-color: #1e7e34;
+}

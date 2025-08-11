@@ -11,11 +11,9 @@ class Elex_Cron_Schedule {
 	}
 
 	public function elex_gpf_update_cron_jobs() {
-		global $wpdb;
-		$table_name = $wpdb->prefix . 'gpf_feeds';
-		$feed_query = "SELECT DISTINCT(feed_id) FROM $table_name";
-		$result     = $wpdb->get_results( ( $wpdb->prepare( '%1s', $feed_query ) ? stripslashes( $wpdb->prepare( '%1s', $feed_query ) ) : $wpdb->prepare( '%s', '' ) ), ARRAY_A );  
-		$feed_ids   = wp_list_pluck( $result, 'feed_id' );
+		
+		$result   = elexGPfWPFluent()->table( 'gpf_feeds' )->select( 'feed_id' )->groupBy( 'feed_id' )->get();
+		$feed_ids = wp_list_pluck( $result, 'feed_id' );
 		if ( ! empty( $feed_ids ) ) {
 			foreach ( $feed_ids as $key => $id ) {
 				$saved_data        = array();

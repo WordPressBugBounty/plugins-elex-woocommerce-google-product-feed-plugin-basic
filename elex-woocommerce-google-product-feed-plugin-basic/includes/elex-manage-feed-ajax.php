@@ -14,22 +14,25 @@ class Elex_Manage_Feeds_Ajax_Function {
 
 	public function elex_gpf_manage_feed_remove_file() {
 		check_ajax_referer( 'ajax-elex-gpf-manage-feed-nonce', '_ajax_elex_gpf_manage_feed_nonce' );
-		$file_to_delete      = isset( $_POST['file_to_delete'] ) ? sanitize_text_field( $_POST['file_to_delete'] ) : '';
-		$manage_feed_data    = json_decode( elex_gpf_get_feed_data( $file_to_delete, 'manage_feed_data' )[0]['feed_meta_content'], true );
-		$settings_tag_fields = get_option( 'elex_settings_tab_fields_data' );
-		
+		if ( isset( $_POST['file_to_delete'] ) ) {
+			$manage_feed_data = json_decode( elex_gpf_get_feed_data( sanitize_text_field( $_POST['file_to_delete'] ), 'manage_feed_data' )[0]['feed_meta_content'], true );
+
+			$settings_tag_fields = get_option( 'elex_settings_tab_fields_data' );
+
 			$upload_dir = wp_upload_dir();
 			$base       = $upload_dir['basedir'];
 			$path       = $base . '/elex-product-feed/';
-		
-		unlink( $path . $manage_feed_data['file'] );
-		global $wpdb;
-		$table_name = $wpdb->prefix . 'gpf_feeds';
-		$id         = $file_to_delete;
-		$query      = "DELETE FROM $table_name WHERE feed_id= $id  ";
-		$wpdb->query( ( $wpdb->prepare( '%1s', $query ) ? stripslashes( $wpdb->prepare( '%1s', $query ) ) : $wpdb->prepare( '%s', '' ) ), ARRAY_A );
-		die();
+			$file_name  = basename( $manage_feed_data['file'] );
+			$file_path  = $path . $file_name;
+			if ( is_file( $file_path ) && strpos( realpath( $file_path ), realpath( $path ) ) === 0 ) {
+				unlink( $file_path );
+			}
+			$id = sanitize_text_field( $_POST['file_to_delete'] );
+			elexGpfWPFluent()->table( 'gpf_feeds' )->where( 'feed_id', '=', $id )->delete();
+			die();
+		}
 	}
+
 
 	public function elex_gpf_manage_feed_refresh_file() {
 		check_ajax_referer( 'ajax-elex-gpf-manage-feed-nonce', '_ajax_elex_gpf_manage_feed_nonce' );
