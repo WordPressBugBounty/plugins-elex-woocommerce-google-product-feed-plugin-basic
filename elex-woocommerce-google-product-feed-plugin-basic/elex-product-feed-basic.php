@@ -4,7 +4,7 @@
   Plugin Name: ELEX WooCommerce Google Shopping (Google Product Feed) - Basic
   Plugin URI: https://elextensions.com/plugin/elex-woocommerce-google-product-feed-plugin-free/
   Description: Efficiently generate and manage Google Marketplace feeds for your WooCommerce Store.
-  Version: 1.4.4
+  Version: 1.4.5
   WC requires at least: 2.6.0
   WC tested up to: 10.0.0
   Author: ELEXtensions
